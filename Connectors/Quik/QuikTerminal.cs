@@ -540,7 +540,15 @@ namespace StockSharp.Quik
 		/// <summary>
 		/// Подключен ли терминал к торгам.
 		/// </summary>
-		public bool IsConnected => MainWindow.GetMenu().Items[0].Items[1].IsEnabled;
+		//public bool IsConnected => MainWindow.GetMenu().Items[0].Items[1].IsEnabled;
+		public bool IsConnected
+		{
+			get
+			{ if (MainWindow.GetMenu().Items[0].Items[0].IsEnabled && MainWindow.GetMenu().Items[0].Items[1].IsEnabled == true)
+			return !StatusBar.GetText().IsEmpty();//для новых версий Quik (>=7)
+			return MainWindow.GetMenu().Items[0].Items[1].IsEnabled;//для старых версий Quik (<=7)
+			}
+		}
 
 		/// <summary>
 		/// Использовать для старое подключение DDE + Trans2Quik. По-умолчанию выключено.
